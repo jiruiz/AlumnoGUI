@@ -1,0 +1,10 @@
+00888888	                 fff	         apellidoFFF	18/07/1990	0,00	null	Fecha Nula	M
+00000889	              ininin	                null	21/07/1990	0,00	null	N/A	B
+00888887	                 ooo	            apellido	20/07/1990	0,00	null	Fecha Nula	M
+00000666	                pppp	                null	18/06/2025	0,00	null	N/A	A
+00000222	                uuuu	                null	14/06/2025	0,00	null	Fecha Nula	M
+00000787	              hghghg	                null	04/11/2025	0,00	null	Fecha Nula	B
+00000999	     iiiiiiiiiiiiiii	                null	12/06/2025	0,00	null	Fecha Nula	B
+00000951	              karina	                null	05/06/2025	0,00	null	Fecha Nula	A
+00000852	             ACTUNOM	               SIIII	07/06/2025	0,00	null	Fecha Nula	M
+956231456	              Miguel	               Russo	14/06/2025	0,00	null	Fecha Nula	A
