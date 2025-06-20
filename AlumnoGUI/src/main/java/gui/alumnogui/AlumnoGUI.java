@@ -191,6 +191,11 @@ public class AlumnoGUI extends javax.swing.JFrame {
         pwdTextField.setText("root");
 
         connSQLButton.setText("Conectar");
+        connSQLButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connSQLButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout sqlPanelLayout = new javax.swing.GroupLayout(sqlPanel);
         sqlPanel.setLayout(sqlPanelLayout);
@@ -395,7 +400,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                 actualizarTabla();
                 JOptionPane.showMessageDialog(this, "Alumno creado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             } catch (NullPointerException | NumberFormatException | DAOException | PersonaException ex) {
-              JOptionPane.showMessageDialog(this, "No se creó el alumno '[crearButtonActionPerformed ]'" + ex, "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No se creó el alumno '[crearButtonActionPerformed ]'" + ex, "Error", JOptionPane.ERROR_MESSAGE);
 
             }
         }
@@ -459,6 +464,31 @@ public class AlumnoGUI extends javax.swing.JFrame {
             Logger.getLogger(AlumnoGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_incluirEliminadosCheckActionPerformed
+
+    private void connSQLButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connSQLButtonActionPerformed
+        // TODO add your handling code here:
+        String url = urlTextField.getText();
+        String user = userTextField.getText();
+        String pwd = pwdTextField.getText();
+
+        try {
+            Map<String, String> config = new HashMap<>();
+            config.put(DAOFactory.TIPO_DAO, "TIPO_DAO_SQL");
+            config.put(DAOFactory.URL_SQL, url);
+
+            // Si  factory y DAO permiten user y password personalizados
+            config.put("USER", user);
+            config.put("PASSWORD", pwd);
+
+            daoSQL = (AlumnoDAOSql) DAOFactory.getInstance().buildDAO(config);  // casteo si querés guardar aparte
+            dao = daoSQL;
+
+            actualizarTabla();
+            JOptionPane.showMessageDialog(this, "Conexión SQL establecida correctamente.");
+        } catch (DAOException | DAOFactoryException ex) {
+            JOptionPane.showMessageDialog(this, "Error al conectar con la base SQL:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_connSQLButtonActionPerformed
 
     /**
      * @param args the command line arguments
