@@ -5,6 +5,9 @@
 00000222	                uuuu	                null	14/06/2025	0,00	null	Fecha Nula	M
 00000787	              hghghg	                null	04/11/2025	0,00	null	Fecha Nula	B
 00000999	     iiiiiiiiiiiiiii	                null	12/06/2025	0,00	null	Fecha Nula	B
-00000951	              karina	                null	05/06/2025	0,00	null	Fecha Nula	A
+00000951	              karina	             jijiiji	05/06/2025	0,00	null	Fecha Nula	M
 00000852	             ACTUNOM	               SIIII	07/06/2025	0,00	null	Fecha Nula	M
 956231456	              Miguel	               Russo	14/06/2025	0,00	null	Fecha Nula	A
+00077777	                 yyy	                 ooo	06/06/2025	0,00	null	Fecha Nula	M
+00002222	               22222	                2222	01/01/1900	0,00	null	Fecha Nula	A
+00000555	                 555	                 555	16/01/2015	0,00	null	01/01/0009	M

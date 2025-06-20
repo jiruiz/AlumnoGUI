@@ -388,13 +388,15 @@ public class AlumnoGUI extends javax.swing.JFrame {
 
         Alumno alu = aluDialog.getAlu();
 
-        if (alu != null) {
+        if (alu != null && alu.getDni() > 0) {
             try {
                 alu.setEstado('A');
                 dao.create(alu);
                 actualizarTabla();
-            } catch (DAOException | PersonaException ex) {
-                Logger.getLogger(AlumnoGUI.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "Alumno creado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            } catch (NullPointerException | NumberFormatException | DAOException | PersonaException ex) {
+              JOptionPane.showMessageDialog(this, "No se creó el alumno '[crearButtonActionPerformed ]'" + ex, "Error", JOptionPane.ERROR_MESSAGE);
+
             }
         }
     }//GEN-LAST:event_crearButtonActionPerformed

@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import persona.Alumno;
 
 /**
@@ -161,9 +162,9 @@ public class AluDialog extends javax.swing.JDialog {
             try {
                 if (alu == null) {
                     alu = new Alumno();
-                    alu.setDni(Integer.parseInt(dniTextField.getText()));
+                    
                 }
-
+                alu.setDni(Integer.parseInt(dniTextField.getText()));
                 alu.setNombre(nombreTextField.getText());
                 alu.setApellido(apellidoTextField.getText());
 
@@ -172,15 +173,16 @@ public class AluDialog extends javax.swing.JDialog {
                     int year = cal.get(Calendar.YEAR);
                     int month = cal.get(Calendar.MONTH) + 1;
                     int day = cal.get(Calendar.DAY_OF_MONTH);
-                    alu.setFecNac(LocalDate.of(year, month, day));
+                    alu.setFecNac(LocalDate.of(year, month, day)); 
                 }
+                setVisible(false);
 
-            } catch (PersonaException ex) {
-                Logger.getLogger(AluDialog.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NumberFormatException | PersonaException ex) {
+                JOptionPane.showMessageDialog(this, "Error al crear el DNI. Ingrese solo numeros." + ex, "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
-        setVisible(false);
+        
     }//GEN-LAST:event_okButtonActionPerformed
 
     private void apellidoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoTextFieldActionPerformed
