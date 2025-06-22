@@ -35,6 +35,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
     private AlumnoDAOSql daoSQL;
     private final AlumnosTableModel alumnosModel;
     private List<Alumno> alumnos;
+    private boolean conectado = false;
 
     /**
      * Creates new form AlumnoGUI
@@ -164,7 +165,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(fullpathTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chooserButton))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Tipo de Repositorio:");
@@ -213,7 +214,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pwdTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(connSQLButton, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+                        .addComponent(connSQLButton, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
                     .addGroup(sqlPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
@@ -237,7 +238,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                     .addGroup(sqlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(userTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -248,27 +249,29 @@ public class AlumnoGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(incluirEliminadosCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(crearButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(modificarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                            .addComponent(deleteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                            .addComponent(consultarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(deleteButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(modificarButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(crearButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(consultarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(6, 6, 6))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(36, 36, 36)
                                 .addComponent(repoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(sqlPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(sqlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(14, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +280,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(repoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(sqlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -308,15 +311,47 @@ public class AlumnoGUI extends javax.swing.JFrame {
         sqlPanel.setVisible(repoComboBox.getSelectedIndex()==1);
          */
         if (repoComboBox.getSelectedIndex() == 0) {
+            {
+                String path = fullpathTextField.getText().trim();
+                if (!path.isEmpty()) {
+                    try {
+                        Map<String, String> config = new HashMap<>();
+                        config.put(DAOFactory.TIPO_DAO, "TIPO_DAO_TXT");
+                        config.put(DAOFactory.FULLPATH, path);
+                        daoTXT = (AlumnoDAOTxt) DAOFactory.getInstance().buildDAO(config);
+                    } catch (DAOFactoryException ex) {
+                        JOptionPane.showMessageDialog(this, "Error al crear DAO TXT: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+
             if (daoTXT != null) {
                 dao = daoTXT;
+                try {
+                    actualizarTabla(); // Recarga la tabla desde TXT
+                } catch (DAOException ex) {
+                    JOptionPane.showMessageDialog(this, "Error al cargar alumnos desde TXT: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                alumnosModel.setAlumnos(List.of());
+                alumnosModel.fireTableDataChanged();
             }
+
             txtPanel.setVisible(true);
             sqlPanel.setVisible(false);
         } else {
             if (daoSQL != null) {
                 dao = daoSQL;
+                try {
+                    actualizarTabla(); // Recarga la tabla desde SQL
+                } catch (DAOException ex) {
+                    JOptionPane.showMessageDialog(this, "Error al cargar alumnos desde SQL: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                alumnosModel.setAlumnos(List.of()); // Limpia la tabla si no hay DAO
+                alumnosModel.fireTableDataChanged();
             }
+
             txtPanel.setVisible(false);
             sqlPanel.setVisible(true);
         }
@@ -393,14 +428,14 @@ public class AlumnoGUI extends javax.swing.JFrame {
 
         Alumno alu = aluDialog.getAlu();
 
-        if (alu != null && alu.getDni() > 0) {
+        if (alu != null) {
             try {
                 alu.setEstado('A');
                 dao.create(alu);
                 actualizarTabla();
                 JOptionPane.showMessageDialog(this, "Alumno creado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             } catch (NullPointerException | NumberFormatException | DAOException | PersonaException ex) {
-                JOptionPane.showMessageDialog(this, "No se creó el alumno '[crearButtonActionPerformed ]'" + ex, "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Seleccione el archivo para crear un alumno. '[crearButtonActionPerformed ]', intentalo nuevamente." + ex, "Error", JOptionPane.ERROR_MESSAGE);
 
             }
         }
@@ -467,27 +502,33 @@ public class AlumnoGUI extends javax.swing.JFrame {
 
     private void connSQLButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connSQLButtonActionPerformed
         // TODO add your handling code here:
-        String url = urlTextField.getText();
-        String user = userTextField.getText();
-        String pwd = pwdTextField.getText();
-
         try {
-            Map<String, String> config = new HashMap<>();
-            config.put(DAOFactory.TIPO_DAO, "TIPO_DAO_SQL");
-            config.put(DAOFactory.URL_SQL, url);
-
-            // Si  factory y DAO permiten user y password personalizados
-            config.put("USER", user);
-            config.put("PASSWORD", pwd);
-
-            daoSQL = (AlumnoDAOSql) DAOFactory.getInstance().buildDAO(config);  // casteo si querés guardar aparte
-            dao = daoSQL;
-
-            actualizarTabla();
-            JOptionPane.showMessageDialog(this, "Conexión SQL establecida correctamente.");
+            if (!conectado) {//si conectado es distinto de false, osea, si es TRUE, continuo
+                Map<String, String> config = new HashMap<>();
+                config.put(DAOFactory.TIPO_DAO, "TIPO_DAO_SQL");
+                config.put(DAOFactory.URL_SQL, urlTextField.getText());
+                config.put("USER", userTextField.getText());
+                config.put("PASSWORD", pwdTextField.getText());
+                daoSQL = (AlumnoDAOSql) DAOFactory.getInstance().buildDAO(config);
+                dao = daoSQL;
+                actualizarTabla();
+                JOptionPane.showMessageDialog(this, "Conexión SQL establecida correctamente.");
+                connSQLButton.setText("DESCONECTAR");
+            } else {//sino, si conectado es FALSE: 
+                if (daoSQL != null) {//entonces si daosql esta instancido, siendo distinto de null.
+                    daoSQL.close();//cierro la conexion
+                    daoSQL = null;//fuerzo a que sea null
+                }
+                dao = null;//aseguro cerrar la conexion al siguiente DAO: dao = daoSQL = (AlumnoDAOSql) DAOFactory.getInstance().buildDAO(config);
+                JOptionPane.showMessageDialog(this, "Conexión cerrada correctamente.");
+                alumnosModel.limpiar();
+                connSQLButton.setText("CONECTAR");
+            }
+            conectado = !conectado;
         } catch (DAOException | DAOFactoryException ex) {
-            JOptionPane.showMessageDialog(this, "Error al conectar con la base SQL:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error:\n" + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_connSQLButtonActionPerformed
 
     /**

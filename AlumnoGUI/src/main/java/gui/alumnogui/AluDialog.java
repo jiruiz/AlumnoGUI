@@ -68,6 +68,12 @@ public class AluDialog extends javax.swing.JDialog {
 
         jLabel1.setText("DNI");
 
+        dniTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dniTextFieldActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Nombre");
 
         okButton.setText("OK");
@@ -162,32 +168,55 @@ public class AluDialog extends javax.swing.JDialog {
             try {
                 if (alu == null) {
                     alu = new Alumno();
-                    
                 }
-                alu.setDni(Integer.parseInt(dniTextField.getText()));
-                alu.setNombre(nombreTextField.getText());
-                alu.setApellido(apellidoTextField.getText());
+                // ACA VALIDO LOS DATOS DE LOS TEXT FIELD PARA QUE SE INGRESEN CORRECTAMENTE
+                String dniStr = dniTextField.getText();
+                if (dniStr == null || dniStr.trim().isEmpty()) {
+                    throw new PersonaException("DNI no puede estar vacío");
+                }
+                alu.setDni(Integer.parseInt(dniStr.trim()));
+
+                String nombre = nombreTextField.getText();
+                if (nombre == null || nombre.trim().isEmpty()) {
+                    throw new PersonaException("Nombre no puede estar vacío");
+                }
+                alu.setNombre(nombre.trim());
+
+                String apellido = apellidoTextField.getText();
+                if (apellido == null || apellido.trim().isEmpty()) {
+                    throw new PersonaException("Apellido no puede estar vacío");
+                }
+                alu.setApellido(apellido.trim());
 
                 Calendar cal = fecNacDateChooser.getCalendar();
                 if (cal != null) {
                     int year = cal.get(Calendar.YEAR);
                     int month = cal.get(Calendar.MONTH) + 1;
                     int day = cal.get(Calendar.DAY_OF_MONTH);
-                    alu.setFecNac(LocalDate.of(year, month, day)); 
+                    alu.setFecNac(LocalDate.of(year, month, day));
+                } else {
+                    throw new PersonaException("Debe seleccionar una fecha de nacimiento");
                 }
+
                 setVisible(false);
 
-            } catch (NumberFormatException | PersonaException ex) {
-                JOptionPane.showMessageDialog(this, "Error al crear el DNI. Ingrese solo numeros." + ex, "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "El DNI debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            } catch (PersonaException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
             }
         }
 
-        
+
     }//GEN-LAST:event_okButtonActionPerformed
 
     private void apellidoTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apellidoTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_apellidoTextFieldActionPerformed
+
+    private void dniTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dniTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dniTextFieldActionPerformed
 
     /**
      * @param args the command line arguments

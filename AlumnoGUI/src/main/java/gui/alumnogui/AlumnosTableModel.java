@@ -13,18 +13,16 @@ import persona.Alumno;
  * @author g.guzman
  */
 public class AlumnosTableModel extends AbstractTableModel {
-    
+
     private static final int DNI_COL = 0;
     private static final int NAME_COL = 1;
     private static final int FEC_NAC_COL = 3;
     private static final int ESTADO_COL = 4;
     private static final int LAST_NAME_COL = 2;//es la segunda posicion del Table
 
-    
     private static final String[] CABECERAS = {"DNI", "Nombre", "Apellido", "Fecha Nac.", "Estado"};
 
     private List<Alumno> alumnos;
-    
 
     public List<Alumno> getAlumnos() {
         return alumnos;
@@ -33,15 +31,18 @@ public class AlumnosTableModel extends AbstractTableModel {
     public void setAlumnos(List<Alumno> alumnos) {
         this.alumnos = alumnos;
     }
+
     @Override
     public int getRowCount() {
-        if (alumnos==null) return 0;
+        if (alumnos == null) {
+            return 0;
+        }
         return alumnos.size();
     }
 
     @Override
     public int getColumnCount() {
-        
+
         return CABECERAS.length;
     }
 
@@ -50,8 +51,13 @@ public class AlumnosTableModel extends AbstractTableModel {
         return CABECERAS[column];
     }
 
-    
-    
+    public void limpiar() {
+        if (alumnos != null) {
+            alumnos.clear();
+        }
+        fireTableDataChanged();
+    }
+
     @Override
     public Object getValueAt(int fila, int col) {
         Alumno alu = alumnos.get(fila);
@@ -61,7 +67,7 @@ public class AlumnosTableModel extends AbstractTableModel {
             case NAME_COL:
                 return alu.getNombre();
             case LAST_NAME_COL:
-                return alu.getApellido();    
+                return alu.getApellido();
             case FEC_NAC_COL:
                 return alu.getFecNacStr();
             case ESTADO_COL:
@@ -69,8 +75,8 @@ public class AlumnosTableModel extends AbstractTableModel {
             default:
                 break;
         }
-        
+
         return null;
     }
-    
+
 }

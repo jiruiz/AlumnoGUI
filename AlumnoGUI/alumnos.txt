@@ -1,6 +1,6 @@
 00888888	                 fff	         apellidoFFF	18/07/1990	0,00	null	Fecha Nula	M
 00000889	              ininin	                null	21/07/1990	0,00	null	N/A	B
-00888887	                 ooo	            apellido	20/07/1990	0,00	null	Fecha Nula	M
+00888887	           ttttppppp	            apellido	20/07/1990	0,00	null	01/01/0009	M
 00000666	                pppp	              ape141	18/06/2025	0,00	null	01/01/0009	M
 00000222	                uuuu	           apellido3	14/06/2025	0,00	null	01/01/0009	M
 00000787	              hghghg	                null	04/11/2025	0,00	null	Fecha Nula	B
@@ -8,8 +8,16 @@
 00000951	              karina	             jijiiji	05/06/2025	0,00	null	Fecha Nula	B
 00000852	             ACTUNOM	               SIIII	07/06/2025	0,00	null	Fecha Nula	M
 956231456	              Miguel	               Russo	14/06/2025	0,00	null	Fecha Nula	A
-00077777	                 yyy	                 ooo	06/06/2025	0,00	null	Fecha Nula	M
+00077777	          yyy nombre	       otro apellido	06/06/2025	0,00	null	01/01/0009	M
 00002222	               22222	              apell2	01/01/1900	0,00	null	01/01/0009	M
-00000555	                 555	                 555	16/01/2015	0,00	null	01/01/0009	M
+00000555	                 555	                 555	16/01/2015	0,00	null	01/01/0009	B
 00667766	                tyty	                jjjj	07/06/2025	0,00	null	01/01/0009	M
 987654321	               Juani	                Ruiz	04/06/2025	0,00	null	01/01/0009	A
+00000047	                  47	                  re	05/06/2025	0,00	null	01/01/0009	M
+00000048	                  48	                  49	06/06/2025	0,00	null	01/01/0009	B
+00003645	                juan	                ruiz	07/06/2025	0,00	null	01/01/0009	A
+777777777	              474747	              fdffff	13/06/2025	0,00	null	01/01/0009	M
+00777888	             7778888	                7788	13/06/2025	0,00	null	01/01/0009	A
+00020202	                0202	                0202	07/06/2025	0,00	null	01/01/0009	A
+00003434	                 324	                 234	06/06/2025	0,00	null	01/01/0009	A
+00003344	                  ew	                  we	06/06/2025	0,00	null	01/01/0009	A
