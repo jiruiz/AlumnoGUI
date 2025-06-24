@@ -19,8 +19,13 @@ public class AlumnosTableModel extends AbstractTableModel {
     private static final int FEC_NAC_COL = 3;
     private static final int ESTADO_COL = 4;
     private static final int LAST_NAME_COL = 2;//es la segunda posicion del Table
-
-    private static final String[] CABECERAS = {"DNI", "Nombre", "Apellido", "Fecha Nac.", "Estado"};
+    private static final int PROMEDIO = 5;
+    private static final int CANT_MAT_APROB = 6;
+    private static final int FEC_ING = 7;
+    
+    
+    
+    private static final String[] CABECERAS = {"DNI", "Nombre", "Apellido", "Fecha Nac.", "Estado", "Promedio", "Mat aprobadas", "Fecha Ingreso" };
 
     private List<Alumno> alumnos;
 
@@ -59,7 +64,7 @@ public class AlumnosTableModel extends AbstractTableModel {
     }
 
     @Override
-    public Object getValueAt(int fila, int col) {
+    public Object getValueAt(int fila, int col) {//dni - nombre - apellido - fecNac - promedio - cantMatAprob - fecIng - estado
         Alumno alu = alumnos.get(fila);
         switch (col) {
             case DNI_COL:
@@ -72,6 +77,12 @@ public class AlumnosTableModel extends AbstractTableModel {
                 return alu.getFecNacStr();
             case ESTADO_COL:
                 return alu.getEstado();
+            case PROMEDIO:
+                return alu.getPromedio(); 
+            case CANT_MAT_APROB:
+                return alu.getCantMatAprob();
+            case FEC_ING:
+                return alu.getFecIngStr();    
             default:
                 break;
         }

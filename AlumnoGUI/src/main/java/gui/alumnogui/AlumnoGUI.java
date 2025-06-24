@@ -12,6 +12,7 @@ import dao.DAOFactory;
 import dao.DAOFactoryException;
 import enums.CrudAction;
 import exceptions.PersonaException;
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.TableModel;
 import persona.Alumno;
 
 /**
@@ -191,6 +191,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
 
         pwdTextField.setText("root");
 
+        connSQLButton.setBackground(new java.awt.Color(0, 204, 0));
         connSQLButton.setText("Conectar");
         connSQLButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -348,7 +349,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Error al cargar alumnos desde SQL: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                alumnosModel.setAlumnos(List.of()); // Limpia la tabla si no hay DAO
+                alumnosModel.setAlumnos(List.of()); // Limpia la tabla si no hay DAO inicializado (osea si no hay conexion)
                 alumnosModel.fireTableDataChanged();
             }
 
@@ -502,8 +503,9 @@ public class AlumnoGUI extends javax.swing.JFrame {
 
     private void connSQLButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connSQLButtonActionPerformed
         // TODO add your handling code here:
+        
         try {
-            if (!conectado) {//si conectado es distinto de false, osea, si es TRUE, continuo
+            if (!conectado) {//se lee...si conectado es distinto de false, osea, si es TRUE, continuo con el MAP
                 Map<String, String> config = new HashMap<>();
                 config.put(DAOFactory.TIPO_DAO, "TIPO_DAO_SQL");
                 config.put(DAOFactory.URL_SQL, urlTextField.getText());
@@ -514,6 +516,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                 actualizarTabla();
                 JOptionPane.showMessageDialog(this, "Conexión SQL establecida correctamente.");
                 connSQLButton.setText("DESCONECTAR");
+                connSQLButton.setBackground(Color.RED);
             } else {//sino, si conectado es FALSE: 
                 if (daoSQL != null) {//entonces si daosql esta instancido, siendo distinto de null.
                     daoSQL.close();//cierro la conexion
@@ -523,6 +526,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Conexión cerrada correctamente.");
                 alumnosModel.limpiar();
                 connSQLButton.setText("CONECTAR");
+                connSQLButton.setBackground(Color.GREEN);
             }
             conectado = !conectado;
         } catch (DAOException | DAOFactoryException ex) {
