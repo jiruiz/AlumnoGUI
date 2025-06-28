@@ -424,6 +424,13 @@ public class AlumnoGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void crearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearButtonActionPerformed
+        String fullpath = fullpathTextField.getText().trim();
+
+        // segun repositorio elegido 
+        if ((repoComboBox.getSelectedIndex() == 0 && (fullpath.isEmpty() || dao == null)) || (repoComboBox.getSelectedIndex() == 1 && dao == null)) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un repositorio válido antes de crear un alumno.", "Seleccione un repositorio",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         AluDialog aluDialog = new AluDialog(this, true, CrudAction.CREATE, null);
         aluDialog.setVisible(true);
 
@@ -439,26 +446,31 @@ public class AlumnoGUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Seleccione el archivo para crear un alumno. '[crearButtonActionPerformed ]', intentalo nuevamente." + ex, "Error", JOptionPane.ERROR_MESSAGE);
 
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Creación cancelada", "Cancelado", JOptionPane.WARNING_MESSAGE);
         }
+
     }//GEN-LAST:event_crearButtonActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         int selectedRow = alumnosTable.getSelectedRow();
 
         if (selectedRow != -1) {
-            // Obtener el Alumno seleccionado desde la lista
+            // traemos el alumno seleccionado desde la lista
             Alumno selectedAlumno = alumnos.get(selectedRow);
 
-            // Abrir el diálogo en modo UPDATE
+            // aca abrimos el AluDialog pasando el CrudAction UPDATE
             AluDialog aluDialog = new AluDialog(this, true, CrudAction.UPDATE, selectedAlumno);
             aluDialog.setVisible(true);
 
-            // Obtener el Alumno modificado desde el diálogo
+            // aca obtenemos el alumno modificado desde el AluDialog
             Alumno aluModificado = aluDialog.getAlu();
 
             try {
                 if (aluModificado != null) {
+                    //al uodate le pasamos el alumno modifido que guardamos en el tipo de dato aluModificado
                     dao.update(aluModificado);
+                    //y procedemos a actualizar la tabla
                     actualizarTabla();
                 }
             } catch (DAOException ex) {
@@ -503,20 +515,20 @@ public class AlumnoGUI extends javax.swing.JFrame {
 
     private void connSQLButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connSQLButtonActionPerformed
         // TODO add your handling code here:
-        
+
         try {
             if (!conectado) {//se lee...si conectado es distinto de false, osea, si es TRUE, continuo con el MAP
                 Map<String, String> config = new HashMap<>();
-                config.put(DAOFactory.TIPO_DAO, "TIPO_DAO_SQL");
+                config.put(DAOFactory.TIPO_DAO, "TIPO_DAO_SQL");//aca le asignamos el daoFactory
                 config.put(DAOFactory.URL_SQL, urlTextField.getText());
                 config.put("USER", userTextField.getText());
                 config.put("PASSWORD", pwdTextField.getText());
                 daoSQL = (AlumnoDAOSql) DAOFactory.getInstance().buildDAO(config);
                 dao = daoSQL;
                 actualizarTabla();
-                JOptionPane.showMessageDialog(this, "Conexión SQL establecida correctamente.");
-                connSQLButton.setText("DESCONECTAR");
-                connSQLButton.setBackground(Color.RED);
+                JOptionPane.showMessageDialog(this, "Conexión SQL establecida correctamente.");//Cuando se establece la conexion...
+                connSQLButton.setText("DESCONECTAR");//... mostramos DESCONECTAR en el boton
+                connSQLButton.setBackground(Color.RED);// cambiamos el color al mosrtar DESCONECTAR
             } else {//sino, si conectado es FALSE: 
                 if (daoSQL != null) {//entonces si daosql esta instancido, siendo distinto de null.
                     daoSQL.close();//cierro la conexion
@@ -524,8 +536,8 @@ public class AlumnoGUI extends javax.swing.JFrame {
                 }
                 dao = null;//aseguro cerrar la conexion al siguiente DAO: dao = daoSQL = (AlumnoDAOSql) DAOFactory.getInstance().buildDAO(config);
                 JOptionPane.showMessageDialog(this, "Conexión cerrada correctamente.");
-                alumnosModel.limpiar();
-                connSQLButton.setText("CONECTAR");
+                alumnosModel.limpiar();//se creo este metodo para limpiar el listado, que genera un clear sobre la Jtable
+                connSQLButton.setText("CONECTAR");//entonces volvemos a mostrar el CONECTAR
                 connSQLButton.setBackground(Color.GREEN);
             }
             conectado = !conectado;

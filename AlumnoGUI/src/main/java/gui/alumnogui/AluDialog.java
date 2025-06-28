@@ -238,7 +238,29 @@ public class AluDialog extends javax.swing.JDialog {
                     throw new PersonaException("Apellido no puede estar vacío");
                 }
                 alu.setApellido(apellido.trim());
-
+                
+                String promedio = promedioTextField.getText();
+                if (promedio == null || promedio.trim().isEmpty()) {
+                    throw new PersonaException("El promedio no puede estar vacío");
+                }
+                alu.setPromedio(Double.parseDouble(promedio));
+                
+                String cantMatAprob = matAprobTextField.getText();
+                if (cantMatAprob == null || cantMatAprob.trim().isEmpty()) {
+                    throw new PersonaException("Materias aprobadas no puede estar vacío");
+                }
+                alu.setCantMatAprob(Integer.parseInt(cantMatAprob));
+                
+                Calendar calFecIng = fecIngDateChooser.getCalendar();
+                if (calFecIng != null) {
+                    int year = calFecIng.get(Calendar.YEAR);
+                    int month = calFecIng.get(Calendar.MONTH) + 1;
+                    int day = calFecIng.get(Calendar.DAY_OF_MONTH);
+                    alu.setFecIng(LocalDate.of(year, month, day));
+                } else {
+                    throw new PersonaException("Debe seleccionar una fecha de nacimiento");
+                }
+                
                 Calendar cal = fecNacDateChooser.getCalendar();
                 if (cal != null) {
                     int year = cal.get(Calendar.YEAR);
@@ -252,7 +274,7 @@ public class AluDialog extends javax.swing.JDialog {
                 setVisible(false);
 
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "El DNI debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Algun dato es invalido" + ex, "Error", JOptionPane.ERROR_MESSAGE);
             } catch (PersonaException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
             }

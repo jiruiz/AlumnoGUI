@@ -1,0 +1,8 @@
+exceptions\PersonaException.class
+exceptions\ApellidoVacioException.class
+persona\Persona.class
+exceptions\PersonaDniException.class
+persona\Alumno.class
+exceptions\NombreVacioException.class
+exceptions\ApellidoNullException.class
+exceptions\NombreNullException.class
