@@ -82,6 +82,14 @@ public class AlumnoGUI extends javax.swing.JFrame {
         connSQLButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         alumnosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -428,9 +436,10 @@ public class AlumnoGUI extends javax.swing.JFrame {
 
         // segun repositorio elegido 
         if ((repoComboBox.getSelectedIndex() == 0 && (fullpath.isEmpty() || dao == null)) || (repoComboBox.getSelectedIndex() == 1 && dao == null)) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un repositorio válido antes de crear un alumno.", "Seleccione un repositorio",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un repositorio válido antes de crear un alumno.", "Seleccione un repositorio", JOptionPane.WARNING_MESSAGE);
             return;
         }
+
         AluDialog aluDialog = new AluDialog(this, true, CrudAction.CREATE, null);
         aluDialog.setVisible(true);
 
@@ -526,7 +535,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                 daoSQL = (AlumnoDAOSql) DAOFactory.getInstance().buildDAO(config);
                 dao = daoSQL;
                 actualizarTabla();
-                JOptionPane.showMessageDialog(this, "Conexión SQL establecida correctamente.");//Cuando se establece la conexion...
+                //JOptionPane.showMessageDialog(this, "Conexión SQL establecida correctamente.");//Cuando se establece la conexion...
                 connSQLButton.setText("DESCONECTAR");//... mostramos DESCONECTAR en el boton
                 connSQLButton.setBackground(Color.RED);// cambiamos el color al mosrtar DESCONECTAR
             } else {//sino, si conectado es FALSE: 
@@ -535,7 +544,7 @@ public class AlumnoGUI extends javax.swing.JFrame {
                     daoSQL = null;//fuerzo a que sea null
                 }
                 dao = null;//aseguro cerrar la conexion al siguiente DAO: dao = daoSQL = (AlumnoDAOSql) DAOFactory.getInstance().buildDAO(config);
-                JOptionPane.showMessageDialog(this, "Conexión cerrada correctamente.");
+                //JOptionPane.showMessageDialog(this, "Conexión cerrada correctamente.");
                 alumnosModel.limpiar();//se creo este metodo para limpiar el listado, que genera un clear sobre la Jtable
                 connSQLButton.setText("CONECTAR");//entonces volvemos a mostrar el CONECTAR
                 connSQLButton.setBackground(Color.GREEN);
@@ -546,6 +555,24 @@ public class AlumnoGUI extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_connSQLButtonActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try {
+            // TODO add your handling code here:
+            if (daoSQL != null) {
+                daoSQL.close();
+                JOptionPane.showMessageDialog(this, "Conexión cerrada.");
+            }
+            
+
+        } catch (DAOException ex) {
+            Logger.getLogger(AlumnoGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

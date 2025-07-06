@@ -22,11 +22,13 @@ public class AlumnosTableModel extends AbstractTableModel {
     private static final int PROMEDIO = 5;
     private static final int CANT_MAT_APROB = 6;
     private static final int FEC_ING = 7;
+    
+    
+    
     private static final String[] CABECERAS = {"DNI", "Nombre", "Apellido", "Fecha Nac.", "Estado", "Promedio", "Mat aprobadas", "Fecha Ingreso" };
+
     private List<Alumno> alumnos;
 
-    
-    
     public List<Alumno> getAlumnos() {
         return alumnos;
     }
